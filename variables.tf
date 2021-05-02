@@ -50,3 +50,10 @@ variable "log_bucket_versioning" {
   type        = bool
   default     = false
 }
+
+variable "tags" {
+  description = "Default tags"
+  default = {
+    ManagedBy = "Terraform"
+  }
+}
