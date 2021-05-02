@@ -39,3 +39,4 @@ terraform.rc
 tfplan
 test.tfvars
 .venv
+.env

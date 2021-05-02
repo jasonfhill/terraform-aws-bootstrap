@@ -1,16 +1,11 @@
-locals {
-  state_bucket_name   = "${var.account_alias}-tf-state-${var.region}"
-  logs_bucket_name    = "${var.account_alias}-logs-${var.region}"
-}
-
 resource "aws_iam_account_alias" "alias" {
-  account_alias = var.account_alias
+  account_alias = var.namespace
 }
 
 module "terraform_state_bucket" {
   source  = "./modules/state_bucket"
 
-  bucket         = local.state_bucket_name
+  bucket         = var.state_bucket_name
 
   tags = {
     ManagedBy = "Terraform"
@@ -20,7 +15,7 @@ module "terraform_state_bucket" {
 module "terraform_logs_bucket" {
   source = "./modules/logs_bucket"
 
-  s3_bucket_name = local.logs_bucket_name
+  s3_bucket_name = var.logs_bucket_name
 
   tags = {
     ManagedBy = "Terraform"

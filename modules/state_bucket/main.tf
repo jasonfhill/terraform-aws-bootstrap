@@ -1,5 +1,4 @@
 data "aws_iam_account_alias" "current" {}
-data "aws_partition" "current" {}
 data "aws_caller_identity" "current" {}
 
 data "aws_iam_policy_document" "supplemental_policy" {
@@ -13,7 +12,7 @@ data "aws_iam_policy_document" "supplemental_policy" {
     }
     actions = ["s3:*"]
     resources = [
-      "arn:${data.aws_partition.current.partition}:s3:::${var.bucket}/*"
+      "arn::s3:::${var.bucket}/*"
     ]
     condition {
       test     = "Bool"
@@ -31,12 +30,12 @@ data "aws_iam_policy_document" "supplemental_policy" {
     }
     actions = ["s3:PutObject"]
     resources = [
-      "arn:${data.aws_partition.current.partition}:s3:::${var.bucket}/*"
+      "arn::s3:::${var.bucket}/*"
     ]
     condition {
       test     = "ArnLike"
       variable = "aws:SourceArn"
-      values   = ["arn:${data.aws_partition.current.partition}:s3:::${var.bucket}"]
+      values   = ["arn::s3:::${var.bucket}"]
     }
     condition {
       test     = "StringEquals"

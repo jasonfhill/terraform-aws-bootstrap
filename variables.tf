@@ -3,9 +3,19 @@ variable "region" {
   type        = string
 }
 
-variable "account_alias" {
+variable "namespace" {
   description = "The desired AWS account alias."
   type        = string
+}
+
+variable "state_bucket_name" {
+  description = "Name for the Terraform State bucket"
+  type = string
+}
+
+variable "logs_bucket_name" {
+  description = "Name for the AWS logs bucket"
+  type = string
 }
 
 variable "dynamodb_table_name" {
